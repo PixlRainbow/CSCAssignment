@@ -1,0 +1,58 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CSCAssignment.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/CSCAssignment.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/CSCAssignment.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "new controller",
+            "command": "dotnet-aspnet-codegenerator",
+            "type": "shell",
+            "args": [
+                "-p",
+                "${workspaceFolder}/CSCAssignment.csproj",
+                "controller",
+                "-name",
+                "${input:classname}",
+                "-outDir",
+                "Controllers"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "classname",
+            "description": "name of controller or view",
+            "default": "ValuesController",
+            "type": "promptString"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Weather Service (JQuery)";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <iframe style="width:100%;height:50vh;"></iframe>
+    <script>
+        var decodeHTML = function (html) {
+            var txt = document.createElement('textarea');
+            txt.innerHTML = html;
+            return txt.value;
+        };
+        var frame = document.querySelector("iframe");
+        fetch("https://api.worldweatheronline.com/premium/v1/weather.ashx?key=4bc466f03e764a03827150230192204&q=China&format=json&num_of_days=5")
+            .then(res => res.json())
+            .then(function(data){
+                //frame.src = "data:application/json," + encodeURIComponent(data);
+                console.log(data);
+            });
+    </script>
+</div>

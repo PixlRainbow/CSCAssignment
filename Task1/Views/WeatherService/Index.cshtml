@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Weather Service";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <iframe style="width:100%;height:50vh;background:url(/img/loading.gif) no-repeat center;"></iframe>
+    <a id="fullview">Direct Link (must be manually opened in new tab)</a>
+    <script>
+        var frame = document.querySelector("iframe");
+        frame.src = "/api/WeatherService";
+        frame.onload = function(e){
+            //remove loading gif
+            frame.style.removeProperty("background");
+        };
+        document.querySelector("#fullview").href = frame.src;
+        /*
+        frame = frame.contentWindow || frame.contentDocument.document || frame.contentDocument;
+        frame.document.open();
+        frame.document.write(decodeHTML("@ViewData["WeatherXML"]"))
+        */
+    </script>
+</div>
