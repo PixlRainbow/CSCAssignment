@@ -51,46 +51,36 @@ namespace CSCAssignment.Controllers
 
         [HttpGet]
         [MapToApiVersion("1")]
-        [MapToApiVersion("2")]
-        public IEnumerable<Product> GetAllProducts(string category) {
-            switch (GetAPIVersion())
-            {
-                case "1":
+        public IEnumerable<Product> GetAllProductsV1() {
                     return products;
-                case "2":
-                    //action overloading was removed in dotnet core
+        }
+
+        [HttpGet]
+        [MapToApiVersion("2")]
+        [MapToApiVersion("3")]
+        public IEnumerable<Product> GetAllProductsV2V3(string category) {
+            //action overloading by parameter was removed in dotnet core
                     if (category == null)
                         return repository.GetAll();
                     else
                         return GetProductsByCategory(category);
-                default:
-                    // this code is never reached.
-                    // It is just used to suppress compile error
-                    return null;
             }
-        }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int:min(2)}")]
         [MapToApiVersion("1")]
-        [MapToApiVersion("2")]
-        public IActionResult GetProduct(int id){
-            switch (GetAPIVersion())
-            {
-                case "1":
-                    //replaces attribute validation for min(2)
-                    //this is needed as V2 does not have this restriction
-                    if(id < 2) return NotFound();
-
+        public IActionResult GetProductV1(int id){
                     var product = products.FirstOrDefault(p => p.Id == id);
                     if(product == null) return NotFound();
                     else return Ok(product);
-                case "2":
+        }
+
+        [HttpGet("{id:int}", Name = "GetProduct")]
+        [MapToApiVersion("2")]
+        [MapToApiVersion("3")]
+        public IActionResult GetProductV2V3(int id){
                     Product item = repository.Get(id);
                     if(item == null) return NotFound();
                     else return Ok(item);
-                default:
-                    return null;
-            }
         }
 
         public IEnumerable<Product> GetProductsByCategory(string category){
