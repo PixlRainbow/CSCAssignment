@@ -1,0 +1,9 @@
+[
+    {
+        "outputFileName":"wwwroot/bundles/app.bundle.js",
+        "inputFiles":[
+            "wwwroot/lib/knockout/knockout-debug.js",
+            "wwwroot/js/app.js"
+        ]
+    }
+]
