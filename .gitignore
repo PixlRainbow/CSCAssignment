@@ -1,1 +1,4 @@
 Debug/
+app.db
+tempkey.rsa
+bundles/
