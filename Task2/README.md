@@ -22,3 +22,17 @@
 | **POST**   | `/api/v3/products`                     | Product definition (Product)<blockquote>**Mandatory** name (string)<br>**Mandatory** price (int) **Maximum 100**</blockquote> | Adds a new Product<br>HTTP 201 Created with `Location` header<br>HTTP 400 Bad Request with error message |
 | **PUT**    | `/api/v3/products/{id}`                | Product ID (int)<br>Product definition (Product)                                                                              | Updates an existing Product<br>HTTP 204 No Content on success<br>HTTP 404 if no Product with given ID    |
 | **DELETE** | `/api/v3/products/{id}`                | Product ID (int)                                                                                                              | Deletes an existing Product<br>HTTP 204 No Content on success<br>HTTP 404 if no Product with given ID    |
+# Screenshots
+## V2
+### Create
+![](Screenshots/CRUD/Create.png)
+### Retrieve
+![](Screenshots/CRUD/Retrieve.png)
+### Update
+![](Screenshots/CRUD/Update.png)
+### Delete
+![](Screenshots/CRUD/Delete.png)
+## V3 Validation
+![Missing Name](Screenshots/Validation/Underpost%20Name.png)
+![Invalid Price](Screenshots/Validation/Invalid%20Price.png)
+![Overposting: Ignore posted ID](Screenshots/Validation/Ignore%20ID.png)
