@@ -98,6 +98,7 @@ function ViewModel() {
             self.user(data.userName);
             // Cache the access token in session storage.
             sessionStorage.setItem(tokenKey, data.access_token);
+            self.result("Login OK");
         }).fail(showError);
     }
 

@@ -4,11 +4,13 @@
   <div>
     <h2>All Products</h2>
     <ul id="products" />
+    <img id="productsLoading" src="/img/loading.gif" height="150">
   </div>
   <div>
     <h2>Search by ID</h2>
     <input type="text" id="prodId" size="5" />
     <input type="button" value="Search" onclick="find();" />
+    <img id="productLoading" src="/img/loading.gif" height="32" hidden>
     <p id="product" />
   </div>
 
@@ -26,6 +28,9 @@
               // Add a list item for the product.
               $('<li>', { text: formatItem(item) }).appendTo($('#products'));
             });
+          })
+          .always(function() {
+            $("#productsLoading").attr("hidden","");
           });
     });
 
@@ -35,12 +40,20 @@
 
     function find() {
       var id = $('#prodId').val();
+      if(id === "" || id === undefined){
+        $('#product').text('please enter an ID');
+        return;
+      }
+      $("#productLoading").removeAttr("hidden");
       $.getJSON(uri + '/' + id)
           .done(function (data) {
             $('#product').text(formatItem(data));
           })
           .fail(function (jqXHR, textStatus, err) {
             $('#product').text('Error: ' + err);
+          })
+          .always(function () {
+            $("#productLoading").attr("hidden","");
           });
     }
   </script>

@@ -17,6 +17,9 @@
             .then(function(data){
                 //frame.src = "data:application/json," + encodeURIComponent(data);
                 console.log(data);
+            })
+            .catch(function(err){
+                console.log('Cannot connect to WorldWeatherOnline:\n'+err.message);
             });
     </script>
 </div>

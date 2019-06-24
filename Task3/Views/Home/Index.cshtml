@@ -4,8 +4,22 @@
 
 @section Scripts {
     <script src="/bundles/app.bundle.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("dialog")[0].close();
+        $(document).ajaxComplete(function(){
+          $("dialog")[0].close();
+        });
+        $(document).ajaxStart(function(){
+          $("dialog")[0].showModal();
+        });
+      });
+    </script>
 }
 
+<dialog open>
+  <img src="/img/loading.gif">
+</dialog>
 <div class="row">
   <div class="col-sm-4">
     <form data-bind="submit: callApi">

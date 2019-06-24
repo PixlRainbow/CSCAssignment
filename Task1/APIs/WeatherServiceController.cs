@@ -35,7 +35,12 @@ namespace CSCAssignment.APIs
 
             XmlDocument wsResponseXmlDoc = MakeRequest(url.ToString());
             if(wsResponseXmlDoc != null){
-                return Ok(wsResponseXmlDoc);
+                if(wsResponseXmlDoc.GetElementsByTagName("error").Count == 0)
+                    return Ok(wsResponseXmlDoc);
+                else
+                    return new ObjectResult(wsResponseXmlDoc){
+                        StatusCode = 502
+                    };
             } else
             {
                 wsResponseXmlDoc = CreateErrorDocument("Could not connect to WorldWeatherOnline");
@@ -54,6 +59,14 @@ namespace CSCAssignment.APIs
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(response.GetResponseStream());
                 return xmlDoc;
+            } catch (WebException e) {
+                if(e.Response != null){
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(e.Response.GetResponseStream());
+                    return xmlDoc;
+                } else {
+                    return null;
+                }
             } catch (Exception e) {
                 return null;
             }
