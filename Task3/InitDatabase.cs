@@ -63,10 +63,10 @@ namespace CSCAssignment
 
                         RequireConsent = false,
 
-                        /*ClientSecrets =
+                        ClientSecrets =
                         {
                             new Secret("secret".Sha256())
-                        },*/
+                        },
 
                         AllowedScopes =
                         {
